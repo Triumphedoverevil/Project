@@ -1,0 +1,25 @@
+<?php echo Form::Open(['action' => ['UserController@update'], 'method' => 'PATCH','class'=>'form-horizontal' ]); ?>
+
+
+			<div class="row form-group">
+
+			<?php echo Form::label('name', 'Name:'); ?>
+
+
+			<?php echo Form::text('name',null, ['class'=>'form-control']); ?>
+
+
+			<?php echo Form::label('password', 'Password:'); ?>
+
+
+			<?php echo Form::password('password',null, ['class'=>'form-control']); ?>
+
+
+			<br>
+
+  			<?php echo Form::submit('Login',['class'=>'btn btn-primary btn-sm'] ); ?>
+
+
+  			</div>
+
+<?php echo Form::close(); ?>

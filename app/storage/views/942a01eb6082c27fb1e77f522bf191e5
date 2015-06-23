@@ -1,0 +1,3 @@
+<div id="perf_div"></div>
+
+<?php echo Lava::renderColumnChart('Tasks'); ?>

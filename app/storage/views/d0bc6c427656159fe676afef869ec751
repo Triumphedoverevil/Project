@@ -1,0 +1,73 @@
+<?php $__env->startSection('content'); ?>
+
+<?php echo $task=null;; ?>
+
+
+<div class="page-header">
+  <h1>Tasks<small>&nbsp;&nbsp;<?php echo $strcompleted; ?></small></h1><br>
+  <?php if($strcompleted == 'all'): ?>  
+		<div id="showgraph">	           			
+		  <?php echo Lava::renderColumnChart('tasks', 'showgraph'); ?>
+		</div> 
+		<br/> 
+  <?php endif; ?> 
+    <?php if($strcompleted == 'work'): ?>  
+		<div id="showgraph">	           			
+		  <?php echo Lava::renderColumnChart('tasksWork', 'showgraph'); ?>
+		</div> 
+		<br/> 
+  <?php endif; ?> 
+   <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#addtask">Add New Task</a> 			
+		<div id="addtask" class="panel-collapse collapse">
+			<div class="panel-body">               			
+					<?php echo $__env->make('tasks/partials/_form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+			</div>
+		</div>
+</div>
+
+	<ul class="list-group">
+		<!--<?php echo $i=0; ?> -->
+		<?php if($tasks->count()): ?>
+			<?php foreach($tasks as $task): ?>								
+				
+				<li class="list-group-item">
+				<img src="<?php echo $task->user->photo; ?>" width="60" height="60" alt="<?php echo $task->user->name; ?>"/>&nbsp;&nbsp; 	
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#task<?php echo $i; ?>">
+				<?php echo $task->title; ?>
+
+				
+				</a>
+				<div class="btn-group pull-right" role="group" aria-label="..." > 
+
+						<?php echo Form::open(['action' => ['TasksController@complete', $task->id], 'method' => 'POST']); ?>
+
+	 					<?php echo Form::submit('Complete', ['class'=>'btn btn-success btn-xs']); ?>
+
+						<?php echo Form::close(); ?>
+
+
+				</div>									
+				</li>	
+				<div id="task<?php echo $i; ?>" class="panel-collapse collapse">
+				<div class="panel-body">   		    
+				<?php echo $__env->make('tasks/partials/_editform', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+				</div>
+				</div>
+
+				<br>		
+				<!--<?php echo $i++; ?>-->
+			<?php endforeach; ?>	
+		<?php else: ?>
+			<p> There are no tasks to display.. you must be a new user or amazing
+		<?php endif; ?>
+
+	</ul>
+
+
+<?php $__env->stopSection(); ?>
+
+
+
+
+<?php echo $__env->make('layouts.toolbar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

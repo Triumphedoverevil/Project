@@ -1,0 +1,84 @@
+<script type="text/javascript">
+$(document).ready(function() 
+	{
+	$('#dueDate').datepicker({})
+	;} 
+);
+</script>
+
+<div class="container-fluid">
+
+<?php echo Form::model($task, ['url'=>'/tasks','class'=>'form-horizontal' ]); ?>
+
+
+	<div class="row">
+		<div class="form-group">
+		<?php echo Form::label('category', 'Category:'); ?>
+
+		<?php echo Form::select('category',['Home','Work','Automotive','Projects'],'0', ['class'=>'']); ?>
+
+		&nbsp;
+		<?php echo Form::label('priority', 'Priority:'); ?>
+
+		<?php echo Form::select('priority',['Low','Medium','High'],'0',['class'=>'']); ?>
+
+
+		</div>	
+	</div>	
+
+	<div class="row">
+		<div class="form-group col-lg-5">
+
+		<?php echo Form::label('title', 'Title:'); ?>
+
+
+		<?php echo Form::text('title',null, ['class'=>'form-control']); ?>
+
+
+		</div>
+	</div>
+
+	<div class="row form-group">
+
+		<?php echo Form::label('body', 'Description:'); ?>
+
+		<?php echo Form::textarea('body',null, ['class'=>'form-control']); ?>
+
+
+	</div>
+
+	<div class="row">
+		<div class="form-group">		
+
+		<?php echo Form::label('user_id', 'Assign To:'); ?>
+
+		<?php echo Form::select('user_id', $users, ['class'=>'form-control']); ?>
+
+		&nbsp;
+		<?php echo Form::label('emailbotify', 'Send Email:'); ?>                
+        <?php echo Form::checkbox('emailnotify','1', false); ?>
+
+
+    	</div>
+    </div>
+    	
+    <div class="row">
+    	<div class="form-group col-lg-2">  
+
+        <?php echo Form::label('dueDate', 'Due Date:'); ?>    
+		<?php echo Form::text('dueDate',null,['class'=>'form-control datepicker', 'id' => 'dueDate']); ?> 
+       
+		</div>
+	</div>
+
+	<div class="row form-group pull-right">
+	
+		<?php echo Form::submit('Create Task',['class'=>'btn btn-primary btn-sm'] ); ?>
+
+
+	</div>
+
+<?php echo Form::close(); ?>
+
+
+</div>

@@ -1,0 +1,92 @@
+<script type="text/javascript">
+$(document).ready(function() 
+	{$('.date').datepicker(); });
+</script>
+
+<div class="container-fluid">
+
+<?php echo Form::model($task, ['action' => ['TasksController@update', $task->id], 'method' => 'PATCH','class'=>'form-horizontal' ]); ?>
+
+	
+	<div class="row">
+		<div class="form-group">
+
+		<?php echo Form::label('category', 'Category:'); ?>
+
+		<?php echo Form::select('category',['Home','Work','Automotive','Projects'],$task->category, ['class'=>'']); ?>
+
+		&nbsp;
+		<?php echo Form::label('priority', 'Priority:'); ?>		
+		<?php echo Form::select('priority',['Low','Medium','High'],$task->priority,['class'=>'']); ?>
+
+
+		</div>	
+	</div>	
+
+	<div class="row">
+		<div class="form-group col-lg-5">
+
+		<?php echo Form::label('title', 'Title:'); ?>
+
+
+		<?php echo Form::text('title',null, ['class'=>'form-control']); ?>
+
+
+		</div>
+	</div>
+
+	<div class="row form-group">
+
+		<?php echo Form::label('body', 'Description:'); ?>
+
+		<?php echo Form::textarea('body',null, ['class'=>'form-control']); ?>
+
+
+	</div>
+
+
+	<div class="row">
+
+		<div class="form-group col-lg-3">
+
+		<?php echo Form::label('assignedBy', 'Assigned By:'); ?>
+
+
+		<?php echo Form::text('assignedBy',null,['class'=>'input-small','disabled' => 'disabled']); ?>
+
+
+		</div>
+	</div>
+	
+	<div class="row">
+
+		<div class="form-group col-lg-3">	
+
+        <?php echo Form::label('dueDate', 'Due Date:'); ?>
+
+
+		<?php echo Form::text('dueDate',$task->dueDate,['class'=>'date datepicker', 'id' => 'dueDate' . $task->id]); ?> 
+
+		</div>
+	</div>
+
+	<div class="btn-group pull-right">
+	
+		<?php echo Form::submit('Edit Task',['class'=>'btn btn-warning btn-xs'] ); ?>
+
+		<?php echo Form::close(); ?>
+
+	</div>
+	<div class="btn-group pull-right">
+		<?php echo Form::open(['action' => ['TasksController@destroy', $task->id], 'method' => 'DELETE']); ?>
+
+	 	<?php echo Form::submit('Delete', ['name'=>'delete', 'class'=>'btn btn-danger btn-xs']); ?>
+
+		<?php echo Form::close(); ?>	
+
+	
+	</div>
+	
+
+
+</div>

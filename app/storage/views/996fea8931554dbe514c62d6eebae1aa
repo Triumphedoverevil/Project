@@ -1,0 +1,16 @@
+<?php $__env->startSection('content'); ?>
+
+<article class="row">
+
+<h1><?php echo $task->title; ?></h1>
+
+<?php echo $task->body; ?>
+
+
+</article>
+<p><?php echo link_to($task->user->username."/tasks", "Go Back"); ?></p>
+
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.toolbar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
