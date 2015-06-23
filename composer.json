@@ -16,8 +16,7 @@
 		"way/generators": "~2.0"
 	},
 	"autoload": {
-		"classmap": [
-			"app/commands",
+		"classmap": [			
 			"app/controllers",
 			"app/models",
 			"app/database/migrations",
