@@ -15,9 +15,14 @@ class CreateTransactionsTable extends Migration {
 		Schema::create('transactions', function(Blueprint $table)
 			{
 				$table->increments('id');
-				$table->
-				$table->
-				$table->
+				$table->integer('bankAccountID');
+				$table->date('transactionDate');
+				$table->boolean('isNegitive');
+				$table->integer('amount');
+				$table->string('description');
+				$table->string('category');
+				$table->string('subCategory');
+				$table->string('creator');
 				$table->timestamps();
 			});
 	}

@@ -5,16 +5,14 @@
 </div>
 
 <!-- account drop down from accounts DB -->
-<?php echo Form::model(['url'=>'/budget']); ?>
+<?php echo Form::model(['url'=>'/transactions','class'=>'form-inline' ]); ?>
 
 
-<?php echo Form::select('id',$accounts); ?>
+<?php echo Form::select('id',$accounts,['id' => 'bankAccount']); ?>
 
 &nbsp;&nbsp;
 <?php echo Form::selectMonth('month', Carbon::now()->month); ?>
 
-
-<?php echo Form::close(); ?>	
 
 <hr>             			
 <?php echo $__env->make('budget/partials/_transactionAdd', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
@@ -23,7 +21,35 @@
 <br>
 <br>
 
-This is Where I will loop transactions and use pagination
+<?php foreach($transactions as $transaction): ?>								
+				
+				<li class="list-group-item">
+
+				<?php echo $transaction-> transactionDate; ?>
+
+				<?php echo $transaction-> amount; ?>
+
+				<?php echo $transaction-> description; ?>
+
+				<?php echo $transaction-> category; ?>
+
+
+				<div class="btn-group pull-right" role="group" aria-label="..." > 
+
+						<?php echo Form::open(['action' => ['TransactionController@destroy', $transaction->id], 'method' => 'DELETE']); ?>
+
+	 					<?php echo Form::submit('Delete', ['class'=>'btn btn-danger btn-xs']); ?>
+
+						<?php echo Form::close(); ?>
+
+
+				</div>	
+				</li>								
+				&nbsp;
+
+<?php endforeach; ?>	
+
+
 
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.toolbar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

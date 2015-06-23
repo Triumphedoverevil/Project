@@ -7,13 +7,11 @@
 </div>
 
 <!-- account drop down from accounts DB -->
-{{ Form::model(['url'=>'/budget']) }}
+{{ Form::model(['url'=>'/transactions','class'=>'form-inline' ]) }}
 
-{{ Form::select('id',$accounts) }}
+{{ Form::select('id',$accounts,['id' => 'bankAccount']) }}
 &nbsp;&nbsp;
 {{ Form::selectMonth('month', Carbon::now()->month) }}
-
-{{ Form::close() }}	
 
 <hr>             			
 @include('budget/partials/_transactionAdd')
@@ -22,6 +20,27 @@
 <br>
 <br>
 
-This is Where I will loop transactions and use pagination
+@foreach($transactions as $transaction)								
+				
+				<li class="list-group-item">
+
+				{{ $transaction-> transactionDate }}
+				{{ $transaction-> amount }}
+				{{ $transaction-> description }}
+				{{ $transaction-> category }}
+
+				<div class="btn-group pull-right" role="group" aria-label="..." > 
+
+						{{ Form::open(['action' => ['TransactionController@destroy', $transaction->id], 'method' => 'DELETE']) }}
+	 					{{ Form::submit('Delete', ['class'=>'btn btn-danger btn-xs']) }}
+						{{ Form::close() }}
+
+				</div>	
+				</li>								
+				&nbsp;
+
+@endforeach	
+
+
 
 @stop
